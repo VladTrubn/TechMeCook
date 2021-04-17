@@ -17,6 +17,7 @@ import com.example.techmecook.R
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.example.techmecook.repositories.*
 import com.example.techmecook.model.*
+import com.example.techmecook.model.recipe.RandomRecipeCollection
 import com.example.techmecook.model.result.*
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
@@ -31,10 +32,10 @@ class MainActivity : AppCompatActivity() {
         findViewById<FloatingActionButton>(R.id.fab).setOnClickListener { view ->
             GlobalScope.launch {
                 val repo = RecipeRepository()
-                when (val result = repo.getRandomRecipes(BuildConfig.SPOONACULAR_KEY, 1, "")) {
+                when (val result = repo.getRandomRecipes(1, "")) {
                     is Error -> Log.e("ERROR IN ACTIVITY", "${result.exceptionInfo}")
                     is NetworkError ->  Log.e("ERROR IN ACTIVITY", "INTERNET ERROR") // Snackbar.make(view, "Network error", Snackbar.LENGTH_LONG).setAction("Action", null).show()
-                    is Success ->  Log.e("SUCCESS IN ACTIVITY", result.value.title) //Snackbar.make(view, result.value.title, Snackbar.LENGTH_LONG).setAction("Action", null).show()
+                    is Success ->  Log.e("SUCCESS IN ACTIVITY", result.value.recipes[0].analyzedInstructions[0].steps[0].step) //Snackbar.make(view, result.value.title, Snackbar.LENGTH_LONG).setAction("Action", null).show()
                 }
             }
         }
