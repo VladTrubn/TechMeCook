@@ -9,7 +9,7 @@ import com.example.techmecook.model.result.Result
 class RecipeRepository : BaseRepository() {
     private val api = NetworkService.recipeService
 
-  suspend  fun getRandomRecipes(
+  suspend fun getRandomRecipes(
         number: Int,
         tags: String?,
     ): Result<RandomRecipeCollection> {
