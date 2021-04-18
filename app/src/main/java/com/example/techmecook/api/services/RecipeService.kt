@@ -15,3 +15,4 @@ interface RecipeService {
     ): RandomRecipeCollection
 
 }
+

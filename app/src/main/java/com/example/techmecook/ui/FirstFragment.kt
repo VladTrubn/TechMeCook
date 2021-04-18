@@ -10,6 +10,7 @@ import android.widget.Button
 import com.example.techmecook.R
 import com.google.android.material.snackbar.Snackbar
 import android.widget.Toast
+import androidx.navigation.fragment.findNavController
 import com.example.techmecook.BuildConfig
 import com.example.techmecook.repositories.*
 import com.example.techmecook.model.*
@@ -34,6 +35,7 @@ class FirstFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         view.findViewById<Button>(R.id.button_first).setOnClickListener {
+            findNavController().navigate(R.id.action_FirstFragment_to_SecondFragment)
         }
     }
 }
