@@ -22,3 +22,10 @@ fun AppCompatImageView.bindRecipeImage(image: String?) {
         bindImage(image)
     }
 }
+
+@BindingAdapter("bindIngredientInrecipeImage")
+fun AppCompatImageView.bindIngredientInrecipeImage(image: String?) {
+    image?.let {
+        bindImage(Constants.Spoonacular.IMAGE_URL + image)
+    }
+}

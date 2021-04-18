@@ -4,6 +4,12 @@
     xmlns:tools="http://schemas.android.com/tools">
 
 
+    <data>
+        <variable
+            name="instruction"
+            type="com.example.techmecook.model.instruction.Instruction" />
+    </data>
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
@@ -19,6 +25,7 @@
 
         <com.google.android.material.textview.MaterialTextView
             android:id="@+id/materialTextView"
+            android:text="@{instruction.name}"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"

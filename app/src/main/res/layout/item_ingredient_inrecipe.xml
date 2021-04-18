@@ -4,15 +4,25 @@
     xmlns:tools="http://schemas.android.com/tools">
 
 
+    <data>
+        <variable
+            name="ingredient"
+            type="com.example.techmecook.model.ingredient.IngredientGeneralInfo" />
+        <variable
+            name="clickListener"
+            type="com.example.techmecook.recyclerview.click_listeners.IngredientClickListener" />
+    </data>
 
     <androidx.appcompat.widget.LinearLayoutCompat
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="8dp"
         android:layout_marginRight="8dp"
+        android:onClick="@{() -> clickListener.onClick(ingredient)}"
         android:orientation="vertical">
 
         <com.google.android.material.imageview.ShapeableImageView
+            bindIngredientInrecipeImage="@{ingredient.image}"
             android:layout_width="72dp"
             android:layout_height="72dp"
             android:layout_gravity="center_horizontal"
@@ -27,7 +37,9 @@
             android:layout_gravity="center_horizontal"
             android:maxWidth="92dp"
             android:maxLines="2"
+            android:text="@{ingredient.name}"
             android:textAlignment="center"
+            android:textColor="@color/black"
             android:textSize="12sp"
             tools:text="Ingredient" />
 
@@ -43,7 +55,9 @@
                 android:layout_marginRight="8dp"
                 android:maxWidth="92dp"
                 android:maxLines="2"
+                android:text="@{ingredient.amount}"
                 android:textAlignment="center"
+                android:textColor="@color/black"
                 android:textSize="12sp"
                 tools:text="Amount" />
 
@@ -53,7 +67,9 @@
                 android:layout_gravity="center_horizontal"
                 android:maxWidth="92dp"
                 android:maxLines="2"
+                android:text="@{ingredient.unit}"
                 android:textAlignment="center"
+                android:textColor="@color/black"
                 android:textSize="12sp"
                 tools:text="Unit" />
         </LinearLayout>
