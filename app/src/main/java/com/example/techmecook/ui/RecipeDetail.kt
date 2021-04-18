@@ -8,24 +8,24 @@ import android.view.View
 import android.view.ViewGroup
 import com.example.techmecook.R
 
-class FragmentRecipeDetails : Fragment() {
+class RecipeDetail : Fragment() {
 
     companion object {
-        fun newInstance() = FragmentRecipeDetails()
+        fun newInstance() = RecipeDetail()
     }
 
-    private lateinit var viewModel: FragmentRecipeDetailsViewModel
+    private lateinit var viewModel: RecipeDetailViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.fragment_recipe_details, container, false)
+        return inflater.inflate(R.layout.fragment_recipe_detail, container, false)
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProvider(this).get(FragmentRecipeDetailsViewModel::class.java)
+        viewModel = ViewModelProvider(this).get(RecipeDetailViewModel::class.java)
         // TODO: Use the ViewModel
     }
 

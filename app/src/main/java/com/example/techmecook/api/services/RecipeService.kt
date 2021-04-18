@@ -9,10 +9,16 @@ interface RecipeService {
 
     @GET("recipes/random")
    suspend fun getRandomRecipes(
-            @Query("apiKey") apiKey: String,
             @Query("number") number: Int,
             @Query("tags") tags: String?,
+            @Query("apiKey") apiKey: String
     ): RandomRecipeCollection
+
+    @GET("recipes/{id}/information")
+    suspend fun getRecipe(
+        @Path("id") Id: Int,
+        @Query("apiKey") apiKey: String
+    ): RecipeGeneralInfo
 
 }
 

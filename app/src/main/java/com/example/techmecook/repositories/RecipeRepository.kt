@@ -14,7 +14,15 @@ class RecipeRepository : BaseRepository() {
         tags: String?,
     ): Result<RandomRecipeCollection> {
         return coroutineApiCall(dispatcher) {
-            api.getRandomRecipes(BuildConfig.SPOONACULAR_KEY, number, tags)
+            api.getRandomRecipes(number, tags, BuildConfig.SPOONACULAR_KEY,)
+        }
+    }
+
+    suspend fun getRecipe(
+        Id: Int,
+    ): Result<RecipeGeneralInfo> {
+        return coroutineApiCall(dispatcher) {
+            api.getRecipe(Id, BuildConfig.SPOONACULAR_KEY)
         }
     }
 

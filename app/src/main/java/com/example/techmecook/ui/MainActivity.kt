@@ -32,10 +32,11 @@ class MainActivity : AppCompatActivity() {
         findViewById<FloatingActionButton>(R.id.fab).setOnClickListener { view ->
             GlobalScope.launch {
                 val repo = RecipeRepository()
-                when (val result = repo.getRandomRecipes(1, "")) {
+                val random = (710000..720000).random()
+                when (val result = repo.getRecipe(random)) {
                     is Error -> Log.e("ERROR IN ACTIVITY", "${result.exceptionInfo}")
                     is NetworkError ->  Log.e("ERROR IN ACTIVITY", "INTERNET ERROR") // Snackbar.make(view, "Network error", Snackbar.LENGTH_LONG).setAction("Action", null).show()
-                    is Success ->  Log.e("SUCCESS IN ACTIVITY", result.value.recipes[0].analyzedInstructions[0].steps[0].step) //Snackbar.make(view, result.value.title, Snackbar.LENGTH_LONG).setAction("Action", null).show()
+                    is Success ->  Log.e("SUCCESS IN ACTIVITY", "${result.value.id}") //Snackbar.make(view, result.value.title, Snackbar.LENGTH_LONG).setAction("Action", null).show()
                 }
             }
         }

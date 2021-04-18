@@ -29,7 +29,7 @@ class RecipeGeneralInfoDataSource(
     private suspend fun loadPage(
         loadSize: Int
     ): RandomRecipeCollection {
-        return recipeService.getRandomRecipes(BuildConfig.SPOONACULAR_KEY, loadSize, "vegetarian")
+        return recipeService.getRandomRecipes(loadSize, "vegetarian", BuildConfig.SPOONACULAR_KEY,)
     }
 
     override fun getRefreshKey(state: PagingState<Int, RecipeGeneralInfo>): Int? {
