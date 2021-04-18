@@ -16,9 +16,9 @@ fun AppCompatImageView.bindImage(imagePath: String?) {
     }
 }
 
-@BindingAdapter("bindRecipeIndexImage")
-fun AppCompatImageView.bindBackdropImage(imagePath: String?) {
-    imagePath?.let {
-        bindImage(Constants.Spoonacular.IMAGE_URL+imagePath)
+@BindingAdapter("bindRecipeImage")
+fun AppCompatImageView.bindRecipeImage(image: String?) {
+    image?.let {
+        bindImage(image)
     }
 }

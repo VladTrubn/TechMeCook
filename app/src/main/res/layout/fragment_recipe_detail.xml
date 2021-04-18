@@ -33,6 +33,7 @@
 
             <com.google.android.material.imageview.ShapeableImageView
                 android:id="@+id/shapeableImageView2"
+                bindRecipeImage="@{recipe.image}"
                 android:layout_width="210dp"
                 android:layout_height="140dp"
                 android:layout_marginStart="96dp"
