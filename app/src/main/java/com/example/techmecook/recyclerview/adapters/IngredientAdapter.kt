@@ -1,5 +1,6 @@
 package com.example.techmecook.recyclerview.adapters
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
@@ -25,7 +26,6 @@ class IngredientAdapter(private val clickListener: IngredientClickListener) :
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): IngredientViewHolder {
         val inflater = LayoutInflater.from(parent.context)
         val binding = ItemIngredientInrecipeBinding.inflate(inflater, parent, false)
-
         return IngredientViewHolder(binding)
     }
 

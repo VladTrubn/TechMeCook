@@ -1,5 +1,7 @@
 package com.example.techmecook.util
 
+import android.text.Html
+import android.widget.TextView
 import androidx.appcompat.widget.AppCompatImageView
 import androidx.databinding.BindingAdapter
 import com.bumptech.glide.Glide
@@ -29,4 +31,5 @@ fun AppCompatImageView.bindIngredientInrecipeImage(image: String?) {
         bindImage(Constants.Spoonacular.IMAGE_URL + image)
     }
 }
+
 

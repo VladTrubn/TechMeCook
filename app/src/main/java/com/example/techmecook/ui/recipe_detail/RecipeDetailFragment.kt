@@ -10,11 +10,13 @@ import androidx.navigation.fragment.navArgs
 import com.example.techmecook.databinding.*
 import com.example.techmecook.model.*
 import com.example.techmecook.model.ingredient.IngredientGeneralInfo
+import com.example.techmecook.model.instruction.Instruction
 import com.example.techmecook.recyclerview.adapters.IngredientAdapter
 import com.example.techmecook.recyclerview.adapters.InstructionAdapter
 import com.example.techmecook.recyclerview.click_listeners.IngredientClickListener
+import com.example.techmecook.recyclerview.click_listeners.InstructionClickListener
 
-class RecipeDetailFragment : Fragment(), IngredientClickListener {
+class RecipeDetailFragment : Fragment(), IngredientClickListener, InstructionClickListener {
     private val viewModel by viewModels<RecipeDetailViewModel>()
     private lateinit var binding: FragmentRecipeDetailBinding
 
@@ -31,17 +33,18 @@ class RecipeDetailFragment : Fragment(), IngredientClickListener {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val random = (690000..720000).random()
+        //val random = (690000..720000).random()
+        val random = 639580
 
-        //val instAdapter = InstructionAdapter()
-        //binding.instruction.adapter = instAdapter
+        val instAdapter = InstructionAdapter(this)
+        binding.instruction.adapter = instAdapter
         val ingrAdapter = IngredientAdapter(this)
         binding.ingredientsList.adapter = ingrAdapter
 
         viewModel.getRecipe(random).observe(viewLifecycleOwner) {
             it?.let {
                 binding.recipe = it
-                //instAdapter.submitList(it.analyzedInstructions)
+                instAdapter.submitList(it.analyzedInstructions)
                 ingrAdapter.submitList(it.extendedIngredients)
                 binding.executePendingBindings()
             }
@@ -50,6 +53,9 @@ class RecipeDetailFragment : Fragment(), IngredientClickListener {
     }
 
     override fun onClick(ingredient: IngredientGeneralInfo) {
+    }
+
+    override fun onClick(instruction: Instruction) {
     }
 
 }
