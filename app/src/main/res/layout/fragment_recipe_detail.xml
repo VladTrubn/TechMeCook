@@ -36,7 +36,6 @@
                 bindRecipeImage="@{recipe.image}"
                 android:layout_width="210dp"
                 android:layout_height="140dp"
-                android:layout_marginStart="96dp"
                 android:layout_marginTop="8dp"
                 android:adjustViewBounds="true"
                 app:cardElevation="8dp"
@@ -48,11 +47,12 @@
 
             <TextView
                 android:id="@+id/summary"
+                bindSummary="@{recipe.Summary}"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
+                android:layout_marginStart="8dp"
                 android:layout_marginTop="10dp"
-                android:text="@{recipe.summary}"
+                android:layout_marginEnd="8dp"
                 android:textColor="@color/cardview_dark_background"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -62,11 +62,11 @@
                 android:id="@+id/textView6"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="130dp"
+                android:layout_marginTop="160dp"
                 android:text="Summary"
                 android:textColor="@color/cardview_dark_background"
                 android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/recipeName" />
 
@@ -87,13 +87,16 @@
                 app:layout_constraintBottom_toBottomOf="@+id/recipeName"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.0"
                 tools:text="45 min" />
 
             <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/recipeName"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="24dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="4dp"
+                android:layout_marginEnd="8dp"
                 android:gravity="center"
                 android:maxLines="2"
                 android:text="@{recipe.title}"
@@ -102,9 +105,10 @@
                 android:textSize="18sp"
                 android:textStyle="bold"
                 app:autoSizeTextType="uniform"
-                app:layout_constraintEnd_toStartOf="@+id/recipeTime"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="1.0"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/recipeTime"
                 tools:text="Recipe name" />
 
             <androidx.recyclerview.widget.RecyclerView

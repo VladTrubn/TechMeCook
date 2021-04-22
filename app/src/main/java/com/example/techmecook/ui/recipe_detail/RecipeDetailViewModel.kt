@@ -1,5 +1,6 @@
 package com.example.techmecook.ui.recipe_detail
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -18,6 +19,8 @@ class RecipeDetailViewModel : ViewModel() {
         viewModelScope.launch {
             when (val result = getRecipeFromRepo(Id)) {
                 is Success -> recipe.postValue(result.value!!)
+                is Error -> Log.e("ERROR IN ACTIVITY", "${result.exceptionInfo}")
+                is NetworkError ->  Log.e("ERROR IN ACTIVITY", "INTERNET ERROR")
             }
         }
 
