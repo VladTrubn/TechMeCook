@@ -9,3 +9,4 @@ fun MaterialTextView.bindCookingTime(cookingTime: Int) {
         this.text = "$cookingTime min"
     }
 }
+

@@ -27,3 +27,4 @@ class RecipeDetailViewModel : ViewModel() {
     private suspend fun getRecipeFromRepo(Id: Int) =
         repo.getRecipe(Id)
 }
+

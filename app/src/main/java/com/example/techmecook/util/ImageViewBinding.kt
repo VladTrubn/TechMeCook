@@ -29,3 +29,4 @@ fun AppCompatImageView.bindIngredientInrecipeImage(image: String?) {
         bindImage(Constants.Spoonacular.IMAGE_URL + image)
     }
 }
+
