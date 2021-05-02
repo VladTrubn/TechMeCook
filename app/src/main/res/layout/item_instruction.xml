@@ -31,6 +31,7 @@
             tools:text="Butter two 9-inch cake pans; line the bottoms with parchment." />
 
         <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/steps"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"

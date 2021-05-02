@@ -8,10 +8,10 @@ import com.example.techmecook.recyclerview.click_listeners.InstructionStepClickL
 class InstructionStepViewHolder(private val binding: ItemStepBinding) : RecyclerView.ViewHolder(binding.root) {
 
     fun bind(
-            instruction: InstructionStep,
+            instructionStep: InstructionStep,
             clickListener: InstructionStepClickListener
     ) {
-        binding.step = instruction
+        binding.step = instructionStep
         binding.clickListener = clickListener
         binding.executePendingBindings()
     }

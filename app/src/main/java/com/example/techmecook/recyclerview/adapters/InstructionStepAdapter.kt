@@ -9,8 +9,10 @@ import com.example.techmecook.model.instruction.*
 import com.example.techmecook.recyclerview.click_listeners.InstructionStepClickListener
 import com.example.techmecook.recyclerview.viewholders.InstructionStepViewHolder
 
-class InstructionStepAdapter(private val clickListener: InstructionStepClickListener):
-        ListAdapter<InstructionStep, InstructionStepViewHolder>(ListItemCallback()) {
+class InstructionStepAdapter(
+    private val steps: List<InstructionStep>,
+    private val clickListener: InstructionStepClickListener
+): ListAdapter<InstructionStep, InstructionStepViewHolder>(ListItemCallback()) {
 
     private class ListItemCallback : DiffUtil.ItemCallback<InstructionStep>() {
         override fun areItemsTheSame(oldItem: InstructionStep, newItem: InstructionStep): Boolean {
@@ -30,8 +32,12 @@ class InstructionStepAdapter(private val clickListener: InstructionStepClickList
     }
 
     override fun onBindViewHolder(holder: InstructionStepViewHolder, position: Int) {
-        getItem(position)?.let {
+        this.steps[position].let {
             holder.bind(it, clickListener)
         }
+    }
+
+    override fun getItemCount(): Int {
+        return steps.size
     }
 }

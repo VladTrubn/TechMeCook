@@ -13,6 +13,7 @@ import com.example.techmecook.model.ingredient.IngredientGeneralInfo
 import com.example.techmecook.model.instruction.Instruction
 import com.example.techmecook.recyclerview.adapters.IngredientAdapter
 import com.example.techmecook.recyclerview.adapters.InstructionAdapter
+import com.example.techmecook.recyclerview.adapters.InstructionStepAdapter
 import com.example.techmecook.recyclerview.click_listeners.IngredientClickListener
 import com.example.techmecook.recyclerview.click_listeners.InstructionClickListener
 
@@ -40,7 +41,6 @@ class RecipeDetailFragment : Fragment(), IngredientClickListener, InstructionCli
         binding.instruction.adapter = instAdapter
         val ingrAdapter = IngredientAdapter(this)
         binding.ingredientsList.adapter = ingrAdapter
-
         viewModel.getRecipe(random).observe(viewLifecycleOwner) {
             it?.let {
                 binding.recipe = it
