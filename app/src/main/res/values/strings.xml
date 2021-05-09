@@ -10,4 +10,25 @@
     <string name="hello_first_fragment">Hello first fragment</string>
     <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
     <string name="title_activity_main2">MainActivity</string>
+
+    <string name="login">Login</string>
+    <string name="mail_address">Mail Address</string>
+    <string name="password">Password</string>
+    <string name="register">Register</string>
+    <string name="user_name">Username</string>
+    <string name="repeat_password">Repeat Password</string>
+
+    <string name="mail_cannot_be_empty">Mail cannot be empty!</string>
+    <string name="username_cannot_be_empty">Username cannot be empty!</string>
+    <string name="password_cannot_be_empty">Password cannot be empty!</string>
+    <string name="mail_is_not_valid">Mail is not valid!</string>
+    <string name="login_unsuccessful">Login unsuccessful!</string>
+    <string name="register_unsuccessful">Register unsuccessful!</string>
+    <string name="data_downloading_from_cloud">Data downloading from cloud</string>
+    <string name="fetching_data_unsuccessful">Fetching data unsuccessful!</string>
+    <string name="error_network_connection">ERROR: Check your network connection!</string>
+    <string name="error_user_exist">ERROR: User already exists!</string>
+    <string name="error_user_does_not_exist">ERROR: User does not exist!</string>
+    <string name="error_server_error">ERROR: Server error!</string>
+    <string name="passwords_should_be_same">Passwords should be same!</string>
 </resources>
