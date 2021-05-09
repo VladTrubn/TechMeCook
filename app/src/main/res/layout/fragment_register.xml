@@ -1,6 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout>
 
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.example.techmecook.ui.register.RegisterViewModel" />
+    </data>
+
     <com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
         style="@style/Widget.App.CardView"
@@ -26,6 +33,7 @@
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/textFieldUserName"
+                bindErrorText="@{viewModel.userNameError}"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/default_margin"
@@ -44,11 +52,12 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:inputType="textPersonName"
-                    android:text="Username" />
+                    android:text="@={viewModel.userName}" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/textFieldMail"
+                bindErrorText="@{viewModel.emailError}"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/default_margin"
@@ -67,11 +76,12 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:inputType="textEmailAddress"
-                    android:text="Email" />
+                    android:text="@={viewModel.email}" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/textFieldPass"
+                bindErrorText="@{viewModel.passwordError}"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/default_margin"
@@ -90,11 +100,12 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:inputType="textPassword"
-                    android:text="Password" />
+                    android:text="@={viewModel.password}" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/textFieldPassRepeat"
+                bindErrorText="@{viewModel.passwordRepeatError}"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/default_margin"
@@ -113,7 +124,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:inputType="textPassword"
-                    android:text="PasswordRepeat" />
+                    android:text="@={viewModel.passwordRepeat}" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.button.MaterialButton
