@@ -1,7 +1,8 @@
-package com.example.techmecook.ui.register
+package com.example.techmecook.ui.login
 
+import android.app.Application
+import android.content.Context
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -9,23 +10,25 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.example.techmecook.R
-import com.example.techmecook.databinding.FragmentRegisterBinding
+import com.example.techmecook.databinding.FragmentLoginBinding
 import com.example.techmecook.model.result.Error
 import com.example.techmecook.model.result.NetworkError
 import com.example.techmecook.model.result.Success
+import com.example.techmecook.util.getToken
 import com.example.techmecook.util.invalidateError
 import com.example.techmecook.util.showShortText
+import com.example.techmecook.util.writeToken
 
-class RegisterFragment : Fragment() {
-    private val viewModel by viewModels<RegisterViewModel>()
-    private lateinit var binding: FragmentRegisterBinding
+class LoginFragment : Fragment() {
+    private val viewModel by viewModels<LoginViewModel>()
+    private lateinit var binding: FragmentLoginBinding
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?,
-    ): View? {
-        binding = FragmentRegisterBinding.inflate(inflater, container, false)
+    ): View {
+        binding = FragmentLoginBinding.inflate(inflater, container, false)
         binding.lifecycleOwner = viewLifecycleOwner
         binding.viewModel = viewModel
         return binding.root
@@ -33,50 +36,52 @@ class RegisterFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        if (activity?.getToken() != "API_TOKEN")
+            navigateToMain();
 
         invalidateInput()
 
         binding.buttonLogin.setOnClickListener {
-            navigateToLogin()
+            viewModel.tryLogin()
         }
 
         binding.buttonRegister.setOnClickListener {
-            viewModel.tryRegister()
+            navigateToRegister()
         }
 
-        registerResponse()
+        loginResponse()
     }
 
-    private fun navigateToLogin() {
+    private fun navigateToRegister() {
         findNavController().navigate(
-            RegisterFragmentDirections.actionRegisterFragmentToLoginFragment()
+            LoginFragmentDirections.actionLoginFragmentToRegisterFragment()
         )
     }
 
     private fun navigateToMain() {
         findNavController().navigate(
-            RegisterFragmentDirections.actionRegisterFragmentToFirstFragment()
+            LoginFragmentDirections.actionLoginFragmentToFirstFragment()
         )
     }
 
-    private fun registerResponse() {
-        viewModel.registerResponse.observe(viewLifecycleOwner) {
+    private fun loginResponse() {
+        viewModel.loginResponse.observe(viewLifecycleOwner) {
             when (it) {
-                is Error -> requireContext().showShortText(getString(R.string.error_user_exist))
+                is Error -> requireContext().showShortText(getString(R.string.error_user_does_not_exist))
                 NetworkError -> requireContext().showShortText(getString(R.string.error_network_connection))
                 is Success -> {
-                    requireContext().showShortText("Registration successful!r")
+                    requireContext().showShortText("Success login")
                     navigateToMain()
                 }
+
             }
         }
     }
 
     private fun invalidateInput() {
-        binding.name.invalidateError(binding.textFieldUserName)
         binding.mail.invalidateError(binding.textFieldMail)
         binding.password.invalidateError(binding.textFieldPass)
-        binding.passwordRepeat.invalidateError(binding.textFieldPassRepeat)
     }
 
 }
+

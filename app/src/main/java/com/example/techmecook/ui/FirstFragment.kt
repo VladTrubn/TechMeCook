@@ -36,14 +36,6 @@ class FirstFragment : Fragment() {
 
         view.findViewById<Button>(R.id.button_first).setOnClickListener {
             findNavController().navigate(R.id.action_FirstFragment_to_recipeDetailFragment)
-            /* GlobalScope.launch {
-                val repo = RecipeRepository()
-                when (val result = repo.getRandomRecipes(1, "")) {
-                    is Error -> Log.e("ERROR IN ACTIVITY", "${result.exceptionInfo}")
-                    is NetworkError ->  Log.e("ERROR IN ACTIVITY", "INTERNET ERROR") // Snackbar.make(view, "Network error", Snackbar.LENGTH_LONG).setAction("Action", null).show()
-                    is Success ->  Log.e("SUCCESS IN ACTIVITY", result.value.recipes[0].analyzedInstructions[0].steps[0].step) //Snackbar.make(view, result.value.title, Snackbar.LENGTH_LONG).setAction("Action", null).show()
-                }
-            } */
         }
     }
 }
