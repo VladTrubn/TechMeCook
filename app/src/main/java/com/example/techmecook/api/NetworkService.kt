@@ -34,7 +34,7 @@ private fun OkHttpClient.Builder.ignoreAllSSLErrors(): OkHttpClient.Builder {
 }
 
 private fun getHTTPClient(): OkHttpClient {
-    return  OkHttpClient.Builder().ignoreAllSSLErrors().connectTimeout(10, TimeUnit.SECONDS) .writeTimeout(10, TimeUnit.SECONDS)
+    return  OkHttpClient.Builder().ignoreAllSSLErrors().connectTimeout(10, TimeUnit.SECONDS).writeTimeout(10, TimeUnit.SECONDS)
             .addInterceptor(RequestInterceptor())
             .build()
 }
@@ -58,5 +58,6 @@ private inline fun <reified T> createService(): T =
 
 
 val recipeService = createService<RecipeService>()
+val authService = createService<AuthService>()
 
 }

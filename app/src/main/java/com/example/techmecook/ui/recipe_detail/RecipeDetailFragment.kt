@@ -11,6 +11,8 @@ import com.example.techmecook.databinding.*
 import com.example.techmecook.model.*
 import com.example.techmecook.model.ingredient.IngredientGeneralInfo
 import com.example.techmecook.model.instruction.Instruction
+import com.example.techmecook.model.login.Login
+import com.example.techmecook.model.register.Register
 import com.example.techmecook.recyclerview.adapters.IngredientAdapter
 import com.example.techmecook.recyclerview.adapters.InstructionAdapter
 import com.example.techmecook.recyclerview.adapters.InstructionStepAdapter
@@ -36,6 +38,14 @@ class RecipeDetailFragment : Fragment(), IngredientClickListener, InstructionCli
 
         //val random = (690000..720000).random()
         val random = 639580
+
+        //LOGIN AND REGISTER
+        //////////////////////////////////////
+       //val register = Register("vladtrubn@gmail.com1", "gorzhebyg1", "Gorzhebygl00!")
+        //viewModel.register(register)
+        val login = Login("admin@localhost.local", "AdminPass123!")
+        viewModel.login(login)
+        //////////////////////////////////////
 
         val instAdapter = InstructionAdapter(this)
         binding.instruction.adapter = instAdapter

@@ -5,7 +5,7 @@ import retrofit2.http.GET
 import retrofit2.http.Path
 import retrofit2.http.Query
 
-interface RecipeService {
+interface   RecipeService {
 
     @GET("recipes/random")
    suspend fun getRandomRecipes(
@@ -19,6 +19,8 @@ interface RecipeService {
         @Path("id") Id: Int,
         @Query("apiKey") apiKey: String
     ): RecipeGeneralInfo
+
+
 
 }
 
