@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
+import com.example.techmecook.databinding.DialogFilterBinding
 import com.example.techmecook.databinding.FragmentRecipeListBinding
 import com.example.techmecook.model.recipe.RecipeLight
 import com.example.techmecook.model.result.Error
@@ -15,6 +16,7 @@ import com.example.techmecook.model.result.Success
 import com.example.techmecook.recyclerview.adapters.RecipeListAdapter
 import com.example.techmecook.recyclerview.click_listeners.RecipeClickListener
 import com.example.techmecook.util.showShortText
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 
 class RecipeListFragment : Fragment(), RecipeClickListener {
     private val viewModel by viewModels<RecipeListViewModel>()
@@ -55,6 +57,11 @@ class RecipeListFragment : Fragment(), RecipeClickListener {
             }
         }
 
+        binding.floatingActionButton.setOnClickListener {
+            showFilterDialog()
+            binding.swipeRefreshLayout.isRefreshing = true
+        }
+
         binding.swipeRefreshLayout.setOnRefreshListener {
             fetchRandomRecipes()
         }
@@ -68,6 +75,17 @@ class RecipeListFragment : Fragment(), RecipeClickListener {
         findNavController().navigate(
             RecipeListFragmentDirections.actionRecipeListFragmentToRecipeDetailFragment(recipe.id)
         )
+    }
+
+    private fun showFilterDialog() {
+        val dialogBinding = DialogFilterBinding.inflate(layoutInflater)
+        MaterialAlertDialogBuilder(requireContext())
+            .setTitle("Filter")
+            .setNeutralButton("Cancel") { _, _ -> }
+            .setPositiveButton("Search") { _, _ -> }
+            .setView(dialogBinding.root)
+            .setOnDismissListener { binding.swipeRefreshLayout.isRefreshing = false }
+            .show()
     }
 
 }

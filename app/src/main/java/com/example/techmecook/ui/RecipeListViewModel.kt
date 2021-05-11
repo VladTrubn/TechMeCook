@@ -41,4 +41,5 @@ class RecipeListViewModel(application: Application) : AndroidViewModel(applicati
             }
         }
     }
+
 }
