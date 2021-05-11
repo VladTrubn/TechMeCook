@@ -1,27 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/FirstFragment">
+    app:startDestination="@id/recipeListFragment">
 
-    <fragment
-        android:id="@+id/FirstFragment"
-        android:name="com.example.techmecook.ui.FirstFragment"
-        android:label="@string/first_fragment_label"
-        tools:layout="@layout/fragment_first">
-
-        <action
-            android:id="@+id/action_FirstFragment_to_recipeDetailFragment"
-            app:destination="@id/recipeDetailFragment" />
-    </fragment>
     <fragment
         android:id="@+id/recipeDetailFragment"
         android:name="com.example.techmecook.ui.recipe_detail.RecipeDetailFragment"
-        android:label="RecipeDetailFragment" >
+        android:label="RecipeDetailFragment">
         <argument
-            android:name="Id"
-            app:argType="integer"
-            android:defaultValue="639580" />
+            android:name="recipeId"
+            app:argType="integer" />
+    </fragment>
+    <fragment
+        android:id="@+id/recipeListFragment"
+        android:name="com.example.techmecook.ui.RecipeListFragment"
+        android:label="RecipeListFragment">
+        <action
+            android:id="@+id/action_recipeListFragment_to_recipeDetailFragment"
+            app:destination="@id/recipeDetailFragment" />
     </fragment>
 </navigation>
