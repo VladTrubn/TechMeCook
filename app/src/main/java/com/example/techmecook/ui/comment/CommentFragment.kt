@@ -9,6 +9,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import com.example.techmecook.databinding.FragmentCommentListBinding
 import com.example.techmecook.model.comment.Comment
+import com.example.techmecook.model.comment.CommentCreate
 import com.example.techmecook.model.result.Error
 import com.example.techmecook.model.result.NetworkError
 import com.example.techmecook.model.result.Success
@@ -35,8 +36,17 @@ class CommentFragment : Fragment(), CommentClickListener {
         val adapter = CommentAdapter(this)
         binding.recView.adapter = adapter
 
-        var recipeId = 639452
+        var recipeId = 639456
         fetchComments(recipeId)
+       /* postComment((CommentCreate("FFFFFFFFFFFFFFFFFUUUUUUUUUUUUUUUUUUUUUCCCCCCCCCCCCCCCCKKKKKKKKKKKKKKKKKK", "j@gmail.com", "639456")))
+        viewModel.createResponse.observe(viewLifecycleOwner)
+        {
+            when (it) {
+                is Success -> {
+                   // adapter.submitList(adapter.currentList+it.value)
+                }
+            }
+        } */
 
         viewModel.comments.observe(viewLifecycleOwner) {
             when (it) {
@@ -56,6 +66,11 @@ class CommentFragment : Fragment(), CommentClickListener {
     private fun fetchComments(CommentId: Int) {
         Log.e("AAAAAAAAAAAAAAAA", "UUUUUUUUUUUUUUUUU")
         viewModel.getComments(CommentId)
+    }
+
+    private fun postComment(comment: CommentCreate)
+    {
+        viewModel.postComment(comment)
     }
 
     override fun onClick(comment: Comment) {
