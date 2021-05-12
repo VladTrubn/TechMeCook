@@ -24,7 +24,7 @@
             tools:srcCompat="@android:drawable/sym_def_app_icon" />
 
         <com.google.android.material.textview.MaterialTextView
-            android:id="@+id/materialTextView"
+            android:id="@+id/creatorName"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
@@ -43,7 +43,7 @@
             android:layout_marginTop="8dp"
             android:maxLines="2"
             app:layout_constraintStart_toEndOf="@+id/shapeableImageView"
-            app:layout_constraintTop_toBottomOf="@+id/materialTextView"
+            app:layout_constraintTop_toBottomOf="@+id/creatorName"
             tools:text="Vegetarian, Vegan, Gluten free" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

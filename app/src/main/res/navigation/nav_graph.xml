@@ -2,7 +2,7 @@
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/loginFragment">
+    app:startDestination="@id/commentFragment">
 
     <fragment
         android:id="@+id/recipeDetailFragment"
@@ -48,4 +48,8 @@
             android:id="@+id/action_recipeListFragment_to_recipeDetailFragment"
             app:destination="@id/recipeDetailFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/commentFragment"
+        android:name="com.example.techmecook.ui.CommentFragment"
+        android:label="CommentFragment" />
 </navigation>

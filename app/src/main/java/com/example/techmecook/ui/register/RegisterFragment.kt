@@ -55,7 +55,7 @@ class RegisterFragment : Fragment() {
 
     private fun navigateToMain() {
         findNavController().navigate(
-            RegisterFragmentDirections.actionRegisterFragmentToFirstFragment()
+            RegisterFragmentDirections.actionRegisterFragmentToRecipeListFragment()
         )
     }
 
