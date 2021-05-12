@@ -24,7 +24,7 @@ class RecipeListViewModel(application: Application) : AndroidViewModel(applicati
         get() = _recipes
 
 
-    fun getRandomRecipes(qty: Int = 2) {
+    fun getRandomRecipes(qty: Int = 3) {
         viewModelScope.launch {
             withContext(Dispatchers.IO + viewModelScope.coroutineContext) {
                 when (val result = repo.getRandomRecipes(qty, null)) {
@@ -35,6 +35,31 @@ class RecipeListViewModel(application: Application) : AndroidViewModel(applicati
                     }
                     is NetworkError -> {
                         Log.e("Error", "INTERNET ERROR")
+                        _recipes.postValue(result)
+                    }
+                }
+            }
+        }
+    }
+
+    fun getFilteredRecipes(
+            query: String?,
+            includeIngredients: String?,
+            equipment: String?,
+            diet: String?,
+            type: String?
+    ) {
+        viewModelScope.launch {
+            withContext(Dispatchers.IO + viewModelScope.coroutineContext) {
+                when (val result =
+                        repo.getFilteredRecipes(query, includeIngredients, equipment, diet, type)) {
+                    is Success -> _recipes.postValue(Success(result.value.results))
+                    is Error -> {
+                        Log.e("ERROR","${result.code} ${result.exceptionInfo}")
+                        _recipes.postValue(result)
+                    }
+                    is NetworkError -> {
+                        Log.e("ERROR","INTERNET ERROR")
                         _recipes.postValue(result)
                     }
                 }

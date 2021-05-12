@@ -80,12 +80,19 @@ class RecipeListFragment : Fragment(), RecipeClickListener {
     private fun showFilterDialog() {
         val dialogBinding = DialogFilterBinding.inflate(layoutInflater)
         MaterialAlertDialogBuilder(requireContext())
-            .setTitle("Filter")
-            .setNeutralButton("Cancel") { _, _ -> }
-            .setPositiveButton("Search") { _, _ -> }
-            .setView(dialogBinding.root)
-            .setOnDismissListener { binding.swipeRefreshLayout.isRefreshing = false }
-            .show()
+                .setTitle("Filter")
+                .setNeutralButton("Cancel") { _, _ -> binding.swipeRefreshLayout.isRefreshing = false }
+                .setPositiveButton("Search") { _, _ ->
+                    val query = dialogBinding.filterQuery.text.toString()
+                    val ingredients = dialogBinding.filterIngredients.text.toString()
+                    val equipment = dialogBinding.filterEquipment.text.toString()
+                    val diet = dialogBinding.filterDiet.text.toString()
+
+                    viewModel.getFilteredRecipes(query, ingredients, equipment, diet, null)
+                }
+                .setView(dialogBinding.root)
+                .setOnDismissListener { binding.swipeRefreshLayout.isRefreshing = false }
+                .show()
     }
 
 }

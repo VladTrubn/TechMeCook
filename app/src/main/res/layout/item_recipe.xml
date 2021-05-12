@@ -12,6 +12,7 @@
 
         <com.google.android.material.imageview.ShapeableImageView
             android:id="@+id/recipeImage"
+            bindRecipeIndexImage=""
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:scaleType="centerCrop"
@@ -47,9 +48,10 @@
                     android:layout_marginEnd="4dp"
                     android:fontFamily="sans-serif-black"
                     android:maxLines="2"
-                    android:textColor="@color/black"
+                    android:textColor="@color/white"
                     android:textSize="18sp"
                     android:textStyle="bold"
+                    app:cardBackgroundColor="@color/black"
                     tools:text="Pizza Something Something Something Something Something Something" />
             </androidx.appcompat.widget.LinearLayoutCompat>
         </com.google.android.material.card.MaterialCardView>

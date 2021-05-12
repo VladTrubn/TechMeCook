@@ -8,7 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import com.example.techmecook.R
 
-class FragmentRandomRecipesList : Fragment() {
+class   FragmentRandomRecipesList : Fragment() {
 
     companion object {
         fun newInstance() = FragmentRandomRecipesList()
