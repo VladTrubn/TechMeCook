@@ -18,6 +18,19 @@ class RecipeRepository : BaseRepository() {
         }
     }
 
+    suspend fun getFilteredRecipes(
+            query: String? = null,
+            includeIngredients: String? = null,
+            equipment: String? = null,
+            diet: String? = null,
+            type: String? = null,
+            number: Int = 2,
+    ): Result<RecipeSearchResponse> {
+        return coroutineApiCall(dispatcher) {
+            api.getFilteredRecipes(query, includeIngredients, equipment, diet, type, number)
+        }
+    }
+
     suspend fun getRecipe(
         Id: Int,
     ): Result<RecipeGeneralInfo> {
