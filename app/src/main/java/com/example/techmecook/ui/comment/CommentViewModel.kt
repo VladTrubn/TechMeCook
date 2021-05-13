@@ -8,13 +8,11 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.example.techmecook.model.comment.Comment
 import com.example.techmecook.model.comment.CommentCreate
-import com.example.techmecook.model.recipe.RecipeLight
 import com.example.techmecook.model.result.Error
 import com.example.techmecook.model.result.NetworkError
 import com.example.techmecook.model.result.Result
 import com.example.techmecook.model.result.Success
 import com.example.techmecook.repositories.CommentRepository
-import com.example.techmecook.repositories.RecipeRepository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
@@ -37,7 +35,7 @@ class CommentViewModel(application: Application) : AndroidViewModel(application)
                 when (val result = repo.getComments(recipeId)) {
                     is Success -> _comments.postValue(Success(result.value.comments))
                     is Error -> {
-                        Log.e("Error","${result.code} ${result.exceptionInfo}")
+                        Log.e("Error", "${result.code} ${result.exceptionInfo}")
                         _comments.postValue(result)
                     }
                     is NetworkError -> {
@@ -49,21 +47,10 @@ class CommentViewModel(application: Application) : AndroidViewModel(application)
         }
     }
 
-    fun postComment(comment: CommentCreate)
-    {
+    fun sendComment(comment: CommentCreate) {
         viewModelScope.launch {
             withContext(Dispatchers.IO + viewModelScope.coroutineContext) {
-                when (val result = repo.postComment(comment)) {
-                    is Success -> _createResponse.postValue(Success(result.value))
-                    is Error -> {
-                        Log.e("Error","${result.code} ${result.exceptionInfo}")
-                        _comments.postValue(result)
-                    }
-                    is NetworkError -> {
-                        Log.e("Error", "INTERNET ERROR")
-                        _comments.postValue(result)
-                    }
-                }
+                _createResponse.postValue(repo.postComment(comment))
             }
         }
     }

@@ -60,7 +60,7 @@ class LoginFragment : Fragment() {
 
     private fun navigateToMain() {
         findNavController().navigate(
-            LoginFragmentDirections.actionLoginFragmentToFirstFragment()
+            LoginFragmentDirections.actionLoginFragmentToRegisterFragment()
         )
     }
 
