@@ -61,4 +61,6 @@ private inline fun <reified T> createService(): T =
 val recipeService = createService<RecipeService>()
 val authService = createService<AuthService>()
 val commentService = createService<CommentService>()
+val likeService = createService<LikeService>()
+
 }

@@ -23,19 +23,23 @@ import com.example.techmecook.model.result.Error
 import com.example.techmecook.model.result.NetworkError
 import com.example.techmecook.model.result.Success
 import com.example.techmecook.recyclerview.adapters.CommentAdapter
+import com.example.techmecook.model.like.LikeUpdate
 import com.example.techmecook.recyclerview.adapters.IngredientAdapter
 import com.example.techmecook.recyclerview.adapters.InstructionAdapter
 import com.example.techmecook.recyclerview.click_listeners.CommentClickListener
 import com.example.techmecook.recyclerview.click_listeners.IngredientClickListener
 import com.example.techmecook.recyclerview.click_listeners.InstructionClickListener
+import com.example.techmecook.ui.LikeViewModel
+import com.example.techmecook.util.getToken
 import com.example.techmecook.ui.CommentViewModel
 import com.example.techmecook.util.getToken
+import com.example.techmecook.util.hideSoftKeyboard
 import com.example.techmecook.util.showShortText
 
-class RecipeDetailFragment : Fragment(), IngredientClickListener, InstructionClickListener,
-        CommentClickListener {
+class RecipeDetailFragment : Fragment(), IngredientClickListener, InstructionClickListener,  CommentClickListener{
     private val viewModel by viewModels<RecipeDetailViewModel>()
     private val commentViewModel by viewModels<CommentViewModel>()
+    private val likeViewModel by viewModels<LikeViewModel>()
     private lateinit var binding: FragmentRecipeDetailBinding
 
     private val args by navArgs<RecipeDetailFragmentArgs>()
@@ -51,6 +55,42 @@ class RecipeDetailFragment : Fragment(), IngredientClickListener, InstructionCli
         return binding.root
     }
 
+    private fun setVisibility(visibility: Int)
+    {
+        binding.recipeTime.setVisibility(visibility)
+        binding.recipeName.setVisibility(visibility)
+        binding.textView.setVisibility(visibility)
+        binding.textView6.setVisibility(visibility)
+        binding.like.setVisibility(visibility)
+    }
+    private fun observeLikes() {
+        likeViewModel.likes.observe(viewLifecycleOwner)
+        {
+            when (it) {
+                is Success -> {
+                    Log.e("SUCCESSFULLY LIKED!!", "LIKES!!!")
+                    if (it.value.likedByUser)
+                        binding.like.setColorFilter(Color.argb(255, 255, 233, 0))
+                    else
+                        binding.like.setColorFilter(Color.argb(255, 0, 0, 0))
+                    binding.likeCounter.text = it.value.likes.size.toString()
+                }
+            }
+        }
+        likeViewModel.updateResponse.observe(viewLifecycleOwner)
+        {
+            when (it) {
+                is Success -> {
+                    Log.e("SUCCESSFULLY LIKED!!", "LIKES!!!")
+                    if (it.value.likedByUser)
+                        binding.like.setColorFilter(Color.argb(255, 255, 233, 0))
+                    else
+                        binding.like.setColorFilter(Color.argb(255, 0, 0, 0))
+                    binding.likeCounter.text = it.value.likes.size.toString()
+                }
+            }
+        }
+    }
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val recipeId = args.recipeId
@@ -91,6 +131,15 @@ class RecipeDetailFragment : Fragment(), IngredientClickListener, InstructionCli
 
         binding.commentSend.setOnClickListener { sendComment() }
 
+        setVisibility(View.INVISIBLE)
+
+        getLikes()
+        observeLikes()
+
+        binding.like.setOnClickListener {
+            Log.e("LIKE BUTTON", "LIKE BUTTON WAS CLICKED!!!")
+            updateLike()
+        }
 
         val instAdapter = InstructionAdapter(this)
         binding.instruction.adapter = instAdapter
@@ -102,6 +151,7 @@ class RecipeDetailFragment : Fragment(), IngredientClickListener, InstructionCli
                 binding.recipe = it
                 instAdapter.submitList(it.analyzedInstructions)
                 ingrAdapter.submitList(it.extendedIngredients)
+                setVisibility(View.VISIBLE)
                 binding.executePendingBindings()
             }
         }
@@ -118,14 +168,6 @@ class RecipeDetailFragment : Fragment(), IngredientClickListener, InstructionCli
         commentViewModel.getComments(CommentId)
     }
 
-    fun hideSoftKeyboard(activity : FragmentActivity) {
-        if (activity.getCurrentFocus() == null){
-            return
-        }
-        val inputMethodManager = activity.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
-        inputMethodManager.hideSoftInputFromWindow(requireActivity().getCurrentFocus()?.getWindowToken(), 0)
-    }
-
 
     private fun sendComment() {
         val text = binding.commentInput.text.toString()
@@ -134,12 +176,21 @@ class RecipeDetailFragment : Fragment(), IngredientClickListener, InstructionCli
         val commentCreate = CommentCreate(text, requireActivity().getToken(), args.recipeId.toString())
         commentViewModel.sendComment(commentCreate)
         binding.commentInput.setText("")
-        hideSoftKeyboard(requireActivity())
+        requireActivity().hideSoftKeyboard(requireActivity())
     }
 
 
 
-    override fun onClick(comment: Comment) {
+    override fun onClick(comment: Comment) {}
+
+    private fun getLikes()
+    {
+        requireActivity().getToken()?.let { likeViewModel.getLikes(args.recipeId, it) }
+    }
+
+    private fun updateLike()
+    {
+        likeViewModel.updateLike(LikeUpdate(requireActivity().getToken(), args.recipeId.toString()))
     }
 
 
