@@ -16,19 +16,16 @@ import com.example.techmecook.databinding.FragmentLoginBinding
 import com.example.techmecook.model.result.Error
 import com.example.techmecook.model.result.NetworkError
 import com.example.techmecook.model.result.Success
-import com.example.techmecook.util.getToken
-import com.example.techmecook.util.invalidateError
-import com.example.techmecook.util.showShortText
-import com.example.techmecook.util.writeToken
+import com.example.techmecook.util.*
 
 class LoginFragment : Fragment() {
     private val viewModel by viewModels<LoginViewModel>()
     private lateinit var binding: FragmentLoginBinding
 
     override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?,
+            inflater: LayoutInflater,
+            container: ViewGroup?,
+            savedInstanceState: Bundle?,
     ): View {
         binding = FragmentLoginBinding.inflate(inflater, container, false)
         binding.lifecycleOwner = viewLifecycleOwner
@@ -38,12 +35,13 @@ class LoginFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        if (activity?.getToken() != "API_TOKEN")
+        if (requireActivity().getToken() != "API_TOKEN")
             navigateToMain();
 
         invalidateInput()
 
         binding.buttonLogin.setOnClickListener {
+            requireActivity().hideSoftKeyboard(requireActivity())
             viewModel.tryLogin()
         }
 
@@ -56,13 +54,13 @@ class LoginFragment : Fragment() {
 
     private fun navigateToRegister() {
         findNavController().navigate(
-            LoginFragmentDirections.actionLoginFragmentToRegisterFragment()
+                LoginFragmentDirections.actionLoginFragmentToRegisterFragment()
         )
     }
 
     private fun navigateToMain() {
         findNavController().navigate(
-            LoginFragmentDirections.actionLoginFragmentToRegisterFragment()
+                LoginFragmentDirections.actionLoginFragmentToRecipeListFragment()
         )
     }
 
@@ -84,6 +82,7 @@ class LoginFragment : Fragment() {
         binding.mail.invalidateError(binding.textFieldMail)
         binding.password.invalidateError(binding.textFieldPass)
     }
+
 
 }
 
