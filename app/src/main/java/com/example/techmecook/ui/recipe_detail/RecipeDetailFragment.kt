@@ -79,7 +79,12 @@ class RecipeDetailFragment : Fragment(), IngredientClickListener, InstructionCli
         {
             when (it) {
                 is Success -> {
-                    Log.e("Current like counter:", it.value.likes.size.toString())
+                    Log.e("SUCCESSFULLY LIKED!!", "LIKES!!!")
+                    if (it.value.likedByUser)
+                        binding.like.setColorFilter(Color.argb(255, 255, 233, 0))
+                    else
+                        binding.like.setColorFilter(Color.argb(255, 0, 0, 0))
+                    binding.likeCounter.text = it.value.likes.size.toString()
                 }
             }
         }
