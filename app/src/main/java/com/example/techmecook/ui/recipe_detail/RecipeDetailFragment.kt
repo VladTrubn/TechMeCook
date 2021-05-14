@@ -118,6 +118,14 @@ class RecipeDetailFragment : Fragment(), IngredientClickListener, InstructionCli
         commentViewModel.getComments(CommentId)
     }
 
+    fun hideSoftKeyboard(activity : FragmentActivity) {
+        if (activity.getCurrentFocus() == null){
+            return
+        }
+        val inputMethodManager = activity.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+        inputMethodManager.hideSoftInputFromWindow(requireActivity().getCurrentFocus()?.getWindowToken(), 0)
+    }
+
 
     private fun sendComment() {
         val text = binding.commentInput.text.toString()
@@ -125,7 +133,8 @@ class RecipeDetailFragment : Fragment(), IngredientClickListener, InstructionCli
 
         val commentCreate = CommentCreate(text, requireActivity().getToken(), args.recipeId.toString())
         commentViewModel.sendComment(commentCreate)
-        binding.commentInput.setText("" )
+        binding.commentInput.setText("")
+        hideSoftKeyboard(requireActivity())
     }
 
 
