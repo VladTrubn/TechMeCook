@@ -6,6 +6,7 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
+import com.example.techmecook.model.like.LikeUpdate
 import com.example.techmecook.model.like.*
 import com.example.techmecook.model.result.Error
 import com.example.techmecook.model.result.NetworkError
@@ -23,6 +24,11 @@ class LikeViewModel(application: Application) : AndroidViewModel(application) {
     val likes: LiveData<Result<LikeCollection>>
         get() = _likes
 
+    private val _updateResponse = MutableLiveData<Result<LikeCollection>>()
+    val updateResponse: LiveData<Result<LikeCollection>>
+        get() = _updateResponse
+
+
     fun getLikes(recipeId: Int, creatorId: String) {
         viewModelScope.launch {
             withContext(Dispatchers.IO + viewModelScope.coroutineContext) {
@@ -37,6 +43,14 @@ class LikeViewModel(application: Application) : AndroidViewModel(application) {
                         _likes.postValue(result)
                     }
                 }
+            }
+        }
+    }
+
+    fun updateLike(like: LikeUpdate) {
+        viewModelScope.launch {
+            withContext(Dispatchers.IO + viewModelScope.coroutineContext) {
+                _likes.postValue(repo.updateLike(like))
             }
         }
     }
