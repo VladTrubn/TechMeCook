@@ -1,6 +1,8 @@
 package com.example.techmecook.ui.recipe_detail
 
+import android.graphics.Color
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,15 +12,17 @@ import androidx.navigation.fragment.navArgs
 import com.example.techmecook.databinding.FragmentRecipeDetailBinding
 import com.example.techmecook.model.ingredient.IngredientGeneralInfo
 import com.example.techmecook.model.instruction.Instruction
-import com.example.techmecook.model.login.Login
-import com.example.techmecook.model.register.Register
+import com.example.techmecook.model.result.Success
 import com.example.techmecook.recyclerview.adapters.IngredientAdapter
 import com.example.techmecook.recyclerview.adapters.InstructionAdapter
 import com.example.techmecook.recyclerview.click_listeners.IngredientClickListener
 import com.example.techmecook.recyclerview.click_listeners.InstructionClickListener
+import com.example.techmecook.ui.LikeViewModel
+import com.example.techmecook.util.getToken
 
 class RecipeDetailFragment : Fragment(), IngredientClickListener, InstructionClickListener {
     private val viewModel by viewModels<RecipeDetailViewModel>()
+    private val likeViewModel by viewModels<LikeViewModel>()
     private lateinit var binding: FragmentRecipeDetailBinding
     private val args by navArgs<RecipeDetailFragmentArgs>()
 
@@ -38,26 +42,14 @@ class RecipeDetailFragment : Fragment(), IngredientClickListener, InstructionCli
 
         val recipeId = args.recipeId
 
-        //LOGIN AND REGISTER
-        //////////////////////////////////////
-        //val register = Register("vladtrubn@gmail.com1", "gorzhebyg1", "Gorzhebygl00!")
-        //viewModel.register(register)
-//        val login = Login("admin@localhost.local", "AdminPass123!")
-//        viewModel.login(login)
-        //////////////////////////////////////
-
-        //LOGIN AND REGISTER
-        //////////////////////////////////////
-       //val register = Register("vladtrubn@gmail.com1", "gorzhebyg1", "Gorzhebygl00!")
-        //viewModel.register(register)
-        val login = Login("admin@localhost.local", "AdminPass123!")
-        viewModel.login(login)
-        //////////////////////////////////////
 
         val instAdapter = InstructionAdapter(this)
         binding.instruction.adapter = instAdapter
         val ingrAdapter = IngredientAdapter(this)
         binding.ingredientsList.adapter = ingrAdapter
+
+        getLikes()
+        observeLikes()
 
         viewModel.getRecipe(recipeId).observe(viewLifecycleOwner) {
             it?.let {
@@ -74,6 +66,23 @@ class RecipeDetailFragment : Fragment(), IngredientClickListener, InstructionCli
     }
 
     override fun onClick(instruction: Instruction) {
+    }
+
+    private fun getLikes()
+    {
+        activity?.getToken()?.let { likeViewModel.getLikes(args.recipeId, it) }
+        observeLikes()
+    }
+
+    private fun observeLikes() {
+        likeViewModel.likes.observe(viewLifecycleOwner)
+        {
+            when (it) {
+                is Success -> {
+                    Log.e("Current like counter:", it.value.likes.size.toString())
+                }
+            }
+        }
     }
 
 }
