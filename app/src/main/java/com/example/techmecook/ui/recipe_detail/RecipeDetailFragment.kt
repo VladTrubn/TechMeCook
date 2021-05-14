@@ -114,4 +114,33 @@ class RecipeDetailFragment : Fragment(), IngredientClickListener, InstructionCli
     override fun onClick(instruction: Instruction) {
     }
 
+    private fun fetchComments(CommentId:     Int) {
+        commentViewModel.getComments(CommentId)
+    }
+
+    fun hideSoftKeyboard(activity : FragmentActivity) {
+        if (activity.getCurrentFocus() == null){
+            return
+        }
+        val inputMethodManager = activity.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+        inputMethodManager.hideSoftInputFromWindow(requireActivity().getCurrentFocus()?.getWindowToken(), 0)
+    }
+
+
+    private fun sendComment() {
+        val text = binding.commentInput.text.toString()
+        if (text.isEmpty()) return
+
+        val commentCreate = CommentCreate(text, requireActivity().getToken(), args.recipeId.toString())
+        commentViewModel.sendComment(commentCreate)
+        binding.commentInput.setText("")
+        hideSoftKeyboard(requireActivity())
+    }
+
+
+
+    override fun onClick(comment: Comment) {
+    }
+
+
 }

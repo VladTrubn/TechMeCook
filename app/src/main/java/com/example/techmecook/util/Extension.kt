@@ -1,9 +1,11 @@
 package com.example.techmecook.util
 
 import android.content.Context
+import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
 import androidx.core.widget.doAfterTextChanged
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentActivity
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleEventObserver
 import androidx.lifecycle.LiveData
@@ -38,6 +40,7 @@ fun TextInputEditText.invalidateError(layout: TextInputLayout) {
     }
 }
 
+
 fun TextInputLayout.invalidateError() {
     if (this.error != null)
         this.error = null
@@ -45,3 +48,11 @@ fun TextInputLayout.invalidateError() {
 
 fun <T> LiveData<T>.getNonNullValue() =
         requireNotNull(this.value)
+
+fun Context.hideSoftKeyboard(activity : FragmentActivity) {
+    if (activity.getCurrentFocus() == null){
+        return
+    }
+    val inputMethodManager = activity.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+    inputMethodManager.hideSoftInputFromWindow(activity?.getCurrentFocus()?.getWindowToken(), 0)
+}

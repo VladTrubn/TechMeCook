@@ -1,11 +1,14 @@
 package com.example.techmecook.ui.register
 
+import android.content.Context
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.inputmethod.InputMethodManager
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentActivity
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.example.techmecook.R
@@ -13,6 +16,7 @@ import com.example.techmecook.databinding.FragmentRegisterBinding
 import com.example.techmecook.model.result.Error
 import com.example.techmecook.model.result.NetworkError
 import com.example.techmecook.model.result.Success
+import com.example.techmecook.util.hideSoftKeyboard
 import com.example.techmecook.util.invalidateError
 import com.example.techmecook.util.showShortText
 
@@ -21,9 +25,9 @@ class RegisterFragment : Fragment() {
     private lateinit var binding: FragmentRegisterBinding
 
     override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?,
+            inflater: LayoutInflater,
+            container: ViewGroup?,
+            savedInstanceState: Bundle?,
     ): View? {
         binding = FragmentRegisterBinding.inflate(inflater, container, false)
         binding.lifecycleOwner = viewLifecycleOwner
@@ -41,6 +45,7 @@ class RegisterFragment : Fragment() {
         }
 
         binding.buttonRegister.setOnClickListener {
+            requireActivity().hideSoftKeyboard(requireActivity())
             viewModel.tryRegister()
         }
 
@@ -49,13 +54,13 @@ class RegisterFragment : Fragment() {
 
     private fun navigateToLogin() {
         findNavController().navigate(
-            RegisterFragmentDirections.actionRegisterFragmentToLoginFragment()
+                RegisterFragmentDirections.actionRegisterFragmentToLoginFragment()
         )
     }
 
     private fun navigateToMain() {
         findNavController().navigate(
-            RegisterFragmentDirections.actionRegisterFragmentToFirstFragment()
+                RegisterFragmentDirections.actionRegisterFragmentToRecipeListFragment()
         )
     }
 
@@ -78,5 +83,7 @@ class RegisterFragment : Fragment() {
         binding.password.invalidateError(binding.textFieldPass)
         binding.passwordRepeat.invalidateError(binding.textFieldPassRepeat)
     }
+
+
 
 }

@@ -19,6 +19,58 @@
             android:layout_height="match_parent">
 
 
+            <TextView
+                android:id="@+id/comments2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:text="Comments"
+                android:textColor="@color/cardview_dark_background"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/instruction" />
+
+            <EditText
+                android:id="@+id/commentInput"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginBottom="8dp"
+                android:background="#B6B6B6"
+                android:ems="10"
+                android:hint="Comment"
+                android:inputType="textPersonName"
+                android:textColor="#000000"
+                android:textColorHighlight="#000000"
+                android:visibility="visible"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/commentSend"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/recView" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:visibility="visible"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                app:layout_constraintBottom_toTopOf="@+id/commentInput"
+                app:layout_constraintTop_toBottomOf="@+id/comments2"
+                tools:listitem="@layout/item_comment" />
+
+            <Button
+                android:id="@+id/commentSend"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
+                android:text="Send"
+                app:layout_constraintBottom_toBottomOf="@+id/commentInput"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/commentInput" />
+
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/ingredientsList"
                 android:layout_width="match_parent"

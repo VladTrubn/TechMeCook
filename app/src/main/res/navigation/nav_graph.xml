@@ -2,15 +2,23 @@
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/loginFragment">
+    app:startDestination="@id/recipeListFragment">
 
     <fragment
         android:id="@+id/recipeDetailFragment"
         android:name="com.example.techmecook.ui.recipe_detail.RecipeDetailFragment"
         android:label="RecipeDetailFragment">
         <argument
-        android:name="recipeId"
-        app:argType="integer" />
+            android:name="recipeId"
+            app:argType="integer" />
+    </fragment>
+    <fragment
+        android:id="@+id/recipeListFragment"
+        android:name="com.example.techmecook.ui.RecipeListFragment"
+        android:label="RecipeListFragment">
+        <action
+            android:id="@+id/action_recipeListFragment_to_recipeDetailFragment"
+            app:destination="@id/recipeDetailFragment" />
     </fragment>
     <fragment
         android:id="@+id/loginFragment"
@@ -22,10 +30,8 @@
             app:popUpTo="@id/loginFragment"
             app:popUpToInclusive="true" />
         <action
-            android:id="@+id/action_loginFragment_to_FirstFragment"
-            app:destination="@id/recipeListFragment"
-            app:popUpTo="@id/loginFragment"
-            app:popUpToInclusive="true" />
+            android:id="@+id/action_loginFragment_to_recipeListFragment"
+            app:destination="@id/recipeListFragment" />
     </fragment>
     <fragment
         android:id="@+id/registerFragment"
@@ -39,13 +45,5 @@
         <action
             android:id="@+id/action_registerFragment_to_recipeListFragment"
             app:destination="@id/recipeListFragment" />
-    </fragment>
-    <fragment
-        android:id="@+id/recipeListFragment"
-        android:name="com.example.techmecook.ui.RecipeListFragment"
-        android:label="RecipeListFragment">
-        <action
-            android:id="@+id/action_recipeListFragment_to_recipeDetailFragment"
-            app:destination="@id/recipeDetailFragment" />
     </fragment>
 </navigation>
