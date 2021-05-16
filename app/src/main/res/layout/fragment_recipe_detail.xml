@@ -16,8 +16,60 @@
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="wrap_content">
 
+
+            <TextView
+                android:id="@+id/comments2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:text="Comments"
+                android:textColor="@color/cardview_dark_background"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/instruction" />
+
+            <EditText
+                android:id="@+id/commentInput"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginBottom="8dp"
+                android:background="#B6B6B6"
+                android:ems="10"
+                android:hint="Comment"
+                android:inputType="textPersonName"
+                android:textColor="#000000"
+                android:textColorHighlight="#000000"
+                android:visibility="visible"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/commentSend"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/recView" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:visibility="visible"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                app:layout_constraintBottom_toTopOf="@+id/commentInput"
+                app:layout_constraintTop_toBottomOf="@+id/comments2"
+                tools:listitem="@layout/item_comment" />
+
+            <Button
+                android:id="@+id/commentSend"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
+                android:text="Send"
+                app:layout_constraintBottom_toBottomOf="@+id/commentInput"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/commentInput" />
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/ingredientsList"
@@ -70,6 +122,18 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/recipeName" />
 
+            <TextView
+                android:id="@+id/textView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:text="Instruction"
+                android:textColor="@color/cardview_dark_background"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/ingredientsList" />
+
             <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/recipeTime"
                 bindCookingTime="@{recipe.readyInMinutes}"
@@ -115,13 +179,37 @@
                 android:id="@+id/instruction"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
+                android:layout_marginTop="40dp"
                 android:orientation="vertical"
+                android:visibility="visible"
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/ingredientsList"
                 tools:listitem="@layout/item_instruction" />
+
+            <ImageButton
+                android:id="@+id/like"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="16dp"
+                android:background="#EDECEC"
+                android:tint="#434141"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/recipeTime"
+                app:layout_constraintTop_toBottomOf="@+id/recipeName"
+                app:srcCompat="@android:drawable/btn_star" />
+
+            <TextView
+                android:id="@+id/likeCounter"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="#000000"
+                app:layout_constraintEnd_toEndOf="@+id/like"
+                app:layout_constraintStart_toStartOf="@+id/like"
+                app:layout_constraintTop_toBottomOf="@+id/like" />
+
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.core.widget.NestedScrollView>
 

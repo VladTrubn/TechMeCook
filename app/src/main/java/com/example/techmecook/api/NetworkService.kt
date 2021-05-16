@@ -1,6 +1,7 @@
 package com.example.techmecook.api
 
 import com.example.techmecook.api.services.*
+import com.example.techmecook.model.comment.Comment
 import com.example.techmecook.util.Constants
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
@@ -59,5 +60,7 @@ private inline fun <reified T> createService(): T =
 
 val recipeService = createService<RecipeService>()
 val authService = createService<AuthService>()
+val commentService = createService<CommentService>()
+val likeService = createService<LikeService>()
 
 }

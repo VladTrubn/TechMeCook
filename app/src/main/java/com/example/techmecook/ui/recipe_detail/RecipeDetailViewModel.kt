@@ -34,43 +34,6 @@ class RecipeDetailViewModel : ViewModel() {
 
     private suspend fun getRecipeFromRepo(Id: Int) =
         repo.getRecipe(Id)
-
-
-
-    //LOGIN AND REGISTER
-    //////////////////////////////////////
-    fun register(register: Register): LiveData<RegisterResponse> {
-        val registerResponse = MutableLiveData<RegisterResponse>()
-        viewModelScope.launch {
-            when (val result = sendRegisterRequest(register)) {
-                is Success -> {
-                    Log.e("SUCCESS!!", "${result.value.email} ${result.value.id} ${result.value.username} ")
-                }
-                is Error -> Log.e("ERROR IN ACTIVITY", "${result.code} ${result.exceptionInfo}")
-                is NetworkError ->  Log.e("ERROR IN ACTIVITY", "INTERNET ERROR")
-            }
-        }
-        return registerResponse
-    }
-    private suspend fun sendRegisterRequest(register: Register) =
-            userRepo.register(register)
-
-    fun login(login: Login): LiveData<LoginResponse> {
-        val registerResponse = MutableLiveData<LoginResponse>()
-        viewModelScope.launch {
-            when (val result = sendLoginRequest(login)) {
-                is Success -> {
-                    Log.e("SUCCESS!!", "${result.value.email} ${result.value.username} ${result.value.passwordHash} ")
-                }
-                is Error -> Log.e("ERROR IN ACTIVITY", "${result.code} ${result.exceptionInfo}")
-                is NetworkError ->  Log.e("ERROR IN ACTIVITY", "INTERNET ERROR")
-            }
-        }
-        return registerResponse
-    }
-    private suspend fun sendLoginRequest(login: Login) =
-            userRepo.login(login)
-    //////////////////////////////////////
 }
 
 

@@ -21,10 +21,10 @@ fun TextView.bindSummary(summary: String?) {
 
 @BindingAdapter("bindInstructionName")
 fun TextView.bindInstructionName(instructionName: String?) {
-   if (instructionName!=null)
-        this.text = instructionName
+   if (!instructionName.isNullOrEmpty())
+        this.text = "${instructionName}..."
     else
-        this.text = "Step:"
+       this.text = "____________________________________________________________"
 }
 
 
