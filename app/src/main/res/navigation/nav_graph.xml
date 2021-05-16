@@ -38,10 +38,8 @@
         android:name="com.example.techmecook.ui.register.RegisterFragment"
         android:label="RegisterFragment">
         <action
-            android:id="@+id/action_registerFragment_to_loginFragment"
-            app:destination="@id/loginFragment"
-            app:popUpTo="@id/registerFragment"
-            app:popUpToInclusive="true" />
+            android:id="@+id/action_registerFragment_to_loginFragment2"
+            app:destination="@id/loginFragment" />
         <action
             android:id="@+id/action_registerFragment_to_recipeListFragment"
             app:destination="@id/recipeListFragment" />

@@ -20,9 +20,7 @@ open class BaseRepository {
             } catch (exception: IOException) {
                 Error (-1, null, exception.message)
             } catch (exception: HttpException) {
-                val code = exception.code()
-                val errorResponse = throwableToErrorResponse(exception)
-                Error(code, errorResponse)
+                Error(exception.code(), throwableToErrorResponse(exception))
             } catch (throwable: Throwable) {
                 Error(-1, null, throwable.toString())
             }

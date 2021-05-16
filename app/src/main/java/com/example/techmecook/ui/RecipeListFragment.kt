@@ -18,7 +18,7 @@ import com.example.techmecook.recyclerview.click_listeners.RecipeClickListener
 import com.example.techmecook.util.showShortText
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 
-class RecipeListFragment : Fragment(), RecipeClickListener {
+class   RecipeListFragment : Fragment(), RecipeClickListener {
     private val viewModel by viewModels<RecipeListViewModel>()
     private lateinit var binding: FragmentRecipeListBinding
 

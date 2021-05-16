@@ -54,7 +54,7 @@ class RegisterFragment : Fragment() {
 
     private fun navigateToLogin() {
         findNavController().navigate(
-                RegisterFragmentDirections.actionRegisterFragmentToLoginFragment()
+                RegisterFragmentDirections.actionRegisterFragmentToLoginFragment2()
         )
     }
 

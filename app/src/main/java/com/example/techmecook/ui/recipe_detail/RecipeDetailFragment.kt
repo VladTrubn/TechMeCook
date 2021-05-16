@@ -62,6 +62,9 @@ class RecipeDetailFragment : Fragment(), IngredientClickListener, InstructionCli
         binding.textView.setVisibility(visibility)
         binding.textView6.setVisibility(visibility)
         binding.like.setVisibility(visibility)
+        binding.commentInput.setVisibility(visibility)
+        binding.commentSend.setVisibility(visibility)
+        binding.comments2.setVisibility(visibility)
     }
     private fun observeLikes() {
         likeViewModel.likes.observe(viewLifecycleOwner)
