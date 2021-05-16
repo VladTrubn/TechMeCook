@@ -28,34 +28,16 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         setSupportActionBar(findViewById(R.id.toolbar))
-
-
-
-        /* findViewById<FloatingActionButton>(R.id.fab).setOnClickListener { view ->
-            GlobalScope.launch {
-                val repo = RecipeRepository()
-                val random = (710000..720000).random()
-                when (val result = repo.getRecipe(random)) {
-                    is Error -> Log.e("ERROR IN ACTIVITY", "${result.exceptionInfo}")
-                    is NetworkError ->  Log.e("ERROR IN ACTIVITY", "INTERNET ERROR")
-                    is Success ->  Log.e("SUCCESS IN ACTIVITY", "${result.value.id}")
-                }
-            }
-        }*/
     }
 
 
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
-        // Inflate the menu; this adds items to the action bar if it is present.
         menuInflater.inflate(R.menu.menu_main, menu)
         return true
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
         return when (item.itemId) {
             R.id.action_settings -> true
             else -> super.onOptionsItemSelected(item)
