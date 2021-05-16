@@ -1,4 +1,4 @@
-package com.example.techmecook.ui
+package com.example.techmecook.ui.recipe_list
 
 import android.app.Application
 import android.util.Log

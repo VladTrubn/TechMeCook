@@ -14,7 +14,7 @@
     </fragment>
     <fragment
         android:id="@+id/recipeListFragment"
-        android:name="com.example.techmecook.ui.RecipeListFragment"
+        android:name="com.example.techmecook.ui.recipe_list.RecipeListFragment"
         android:label="RecipeListFragment">
         <action
             android:id="@+id/action_recipeListFragment_to_recipeDetailFragment"

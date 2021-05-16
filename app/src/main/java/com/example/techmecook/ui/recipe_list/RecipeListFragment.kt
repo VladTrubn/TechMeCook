@@ -1,4 +1,4 @@
-package com.example.techmecook.ui
+package com.example.techmecook.ui.recipe_list
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -15,6 +15,7 @@ import com.example.techmecook.model.result.NetworkError
 import com.example.techmecook.model.result.Success
 import com.example.techmecook.recyclerview.adapters.RecipeListAdapter
 import com.example.techmecook.recyclerview.click_listeners.RecipeClickListener
+import com.example.techmecook.ui.RecipeListFragmentDirections
 import com.example.techmecook.util.showShortText
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 
